@@ -116,19 +116,23 @@ class Binomial(Distribution):
         plt.show()
         
         
-    def pdf(self, k):
+    def pmf(self, k):
 
         """
-        Probability density function calculator for the binomial distribution.
+        Probability mass function calculator for the binomial distribution.
         
         Args:
-            k (float): point for calculating the probability density function
-            
+            k (unsigned int): point for calculating the probability mass function. k is in support (the set{0, 1, ..., n})
         
         Returns:
             float: probability density function output
         """
         
+        try:
+            assert k in range(self.n + 1), 'k isn\'t in support'
+        except AssertionError as error:
+            raise
+
         n_choose_k = math.factorial(self.n) / (math.factorial(k) * (math.factorial(self.n - k)))
         prob_of_k_successes = (self.p ** k)
         prob_rest_are_failures = (1 - self.p) ** (self.n - k)
@@ -136,17 +140,17 @@ class Binomial(Distribution):
         return n_choose_k * prob_of_k_successes * prob_rest_are_failures
         
 
-    def plot_bar_pdf(self):
+    def plot_bar_pmf(self):
 
         """
-        Function to plot the pdf of the binomial distribution
+        Function to plot the pmf of the binomial distribution
         
         Args:
             None
         
         Returns:
-            list: x values for the pdf plot
-            list: y values for the pdf plot
+            list: x values for the pmf plot
+            list: y values for the pmf plot
             
         """
         
@@ -156,7 +160,7 @@ class Binomial(Distribution):
         # calculate the x values to visualize
         for i in range(self.n + 1):
             x.append(i)
-            y.append(self.pdf(i))
+            y.append(self.pmf(i))
 
         # make the plots
         plt.bar(x, y)

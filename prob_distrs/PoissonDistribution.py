@@ -103,32 +103,37 @@ class Poisson(Distribution):
 		plt.ylabel('Count')
 		plt.show()
 
-	def pdf(self, k):
+	def pmf(self, k):
 
 		"""
-		Probability density function calculator for the poisson distribution.
+		Probability mass function calculation for the poisson distribution.
 		
 		Args:
-			k (float): point for calculating the probability density function
+			k (unsigned int): point for calculating the probability density function
 		
 		Returns:
 			float: probability density function output
 		"""
 
+		try:
+			assert isinstance(k, int) and k > 0, 'k isn\'t a natural number'
+		except AssertionError as error:
+			raise
+
 		return 1.0 * math.exp(-self.lam)*(self.lam ** k)/math.factorial(k)
 		
 
-	def plot_histogram_pdf(self):
+	def plot_histogram_pmf(self):
 
 		"""
-		Function to plot the pdf of the poisson distribution
+		Function to plot the pmf of the poisson distribution
 		
 		Args:
 			None
 		
 		Returns:
-			list: x values for the pdf plot
-			list: y values for the pdf plot
+			list: x values for the pmf plot
+			list: y values for the pmf plot
 		"""
 
 		x = list(set(self.data))
@@ -137,7 +142,7 @@ class Poisson(Distribution):
 		
 		# calculate the y values to visualize
 		for elem in x:
-			y.append(self.pdf(elem))
+			y.append(self.pmf(elem))
 
 		# make the plot
 		fig, axes = plt.subplots(2,sharex=True)

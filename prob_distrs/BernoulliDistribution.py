@@ -24,22 +24,22 @@ class Bernoulli(Binomial):
     def read_data_file(self):
         pass
         
-    def plot_bar_pdf(self):
+    def plot_bar_pmf(self):
 
         """
-        Function to plot the pdf of the Bernoulli distribution
+        Function to plot the pmf of the Bernoulli distribution
         
         Args:
             None
         
         Returns:
-            list: x values for the pdf plot
-            list: y values for the pdf plot
+            list: x values for the pmf plot
+            list: y values for the pmf plot
             
         """
         
         # make the plots
-        plt.bar(x = ['0', '1'], height = [self.pdf(0), self.pdf(1)])
+        plt.bar(x = ['0', '1'], height = [self.pmf(0), self.pmf(1)])
         plt.title('Distribution of Outcomes')
         plt.ylabel('Probability')
         plt.xlabel('Outcome')
@@ -47,3 +47,22 @@ class Bernoulli(Binomial):
         plt.show()
 
         return x, y
+
+    def pmf(self, k):
+
+        """
+        Probability mass function calculator for the bernoulli distribution.
+        
+        Args:
+            k (unsigned int): point for calculating the probability mass function. k is in support (the set{0, 1})
+        
+        Returns:
+            float: probability density function output
+        """
+        
+        try:
+            assert k in range(2), 'k isn\'t in support'
+        except AssertionError as error:
+            raise
+        
+        return 1 - self.p if k == 0 else self.p
