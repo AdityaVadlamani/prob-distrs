@@ -112,8 +112,22 @@ class Gaussian(Distribution):
 		
 		return (1.0/(self.stdev * math.sqrt(2 * math.pi))) * math.exp(-0.5*((x - self.mean) / self.stdev) ** 2)
 		
+	def cdf(self, x):
+	
+		"""
+		Cumulative density function calculator for the gaussian distribution.
+		
+		Args:
+			x (float): point for calculating the cumulative density function
+			
+		
+		Returns:
+			float: cumulative density function output
+		"""
+		
+		return .5 * (1 + math.erf((x - self.mean)/(self.stdev * math.sqrt(2))))
 
-	def plot_histogram_pdf(self, n_spaces = 50):
+	def plot_histogram_pdf_cdf(self, n_spaces = 50):
 
 		"""
 		Function to plot the normalized histogram of the data and a plot of the 
@@ -123,8 +137,9 @@ class Gaussian(Distribution):
 			n_spaces (int): number of data points 
 		
 		Returns:
-			list: x values for the pdf plot
-			list: y values for the pdf plot
+            list: x values for the both plot
+            list: y1 values for the pmf plot
+            list: y2 values for cmf plot
 			
 		"""
 
@@ -134,27 +149,33 @@ class Gaussian(Distribution):
 		interval = 1.0 * (max_range - min_range) / n_spaces
 
 		x = []
-		y = []
+		y1 = []
+		y2 = []
 		
 		for i in range(n_spaces):
 			tmp = min_range + interval*i
 			x.append(tmp)
-			y.append(self.pdf(tmp))
+			y1.append(self.pdf(tmp))
+			y2.append(self.cdf(tmp))
 
-		fig, axes = plt.subplots(2,sharex=True)
+		fig, axes = plt.subplots(3,sharex=True)
 		fig.subplots_adjust(hspace=.5)
 		
 		axes[0].hist(self.data, n_spaces, density=True)
 		axes[0].set_title('Normed Histogram of Data')
 		axes[0].set_ylabel('Density')
 
-		axes[1].plot(x, y)
-		axes[1].set_title('Normal Distribution for Data')
-		axes[1].set_ylabel('Density')
+		axes[1].plot(x, y1)
+		axes[1].set_title('Probability Distribution of Data')
+		axes[1].set_ylabel('Probability Density')
+
+		axes[2].plot(x, y2)
+		axes[2].set_title('Cumulative Distribution of Data')
+		axes[2].set_ylabel('Probability')
+
 		plt.show()
 
-		return x, y
-
+		return x, y1, y2
 		
 	def __add__(self, other):
 		

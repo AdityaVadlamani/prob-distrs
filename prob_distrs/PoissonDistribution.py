@@ -116,14 +116,32 @@ class Poisson(Distribution):
 		"""
 
 		try:
-			assert isinstance(k, int) and k > 0, 'k isn\'t a natural number'
+			assert (isinstance(k, int) or k.is_integer()) and k >= 0, 'k isn\'t a natural number'
 		except AssertionError as error:
 			raise
 
 		return 1.0 * math.exp(-self.lam)*(self.lam ** k)/math.factorial(k)
 		
+	def cdf(self, k):
 
-	def plot_histogram_pmf(self):
+		"""
+		Cumulative distribution function calculator for the poisson distribution.
+        
+        Args:
+			k (unsigned float): point for calculating the cumulative distribution function.
+        
+ 		Returns:
+			float: cumulative density function output
+		"""
+
+		try:
+			assert k >= 0, 'isn\'t nonnegative'
+		except AssertionError as error:
+			raise
+
+		return sum([self.pmf(x) for x in range(int(math.floor(k)) + 1)])
+
+	def plot_histogram_pmf_cdf(self):
 
 		"""
 		Function to plot the pmf of the poisson distribution
@@ -132,32 +150,40 @@ class Poisson(Distribution):
 			None
 		
 		Returns:
-			list: x values for the pmf plot
-			list: y values for the pmf plot
+			list: x values for the both plot
+			list: y1 values for the pmf plot
+			list: y2 values for the cdf plot
 		"""
 
 		x = list(set(self.data))
 		x.sort()
-		y = []
+		y1 = []
+		y2 = []
 		
 		# calculate the y values to visualize
 		for elem in x:
-			y.append(self.pmf(elem))
+			y1.append(self.pmf(elem))
+			y2.append(self.cdf(elem))
 
 		# make the plot
-		fig, axes = plt.subplots(2,sharex=True)
+		fig, axes = plt.subplots(3,sharex=True)
 		fig.subplots_adjust(hspace=.5)
 		
 		axes[0].hist(self.data, len(x), density=True)
 		axes[0].set_title('Normed Histogram of Data')
 		axes[0].set_ylabel('Density')
 
-		axes[1].plot(x, y)
-		axes[1].set_title('Poisson Distribution for Data')
-		axes[1].set_ylabel('Probability of x')
+		axes[1].plot(x, y1)
+		axes[1].set_title('Probability Distribution for Data')
+		axes[1].set_ylabel('Probability Density')
+
+		axes[2].plot(x, y2)
+		axes[2].set_title('Cumulative Distribution for Data')
+		axes[2].set_ylabel('Probability')
+
 		plt.show()
 
-		return x, y
+		return x, y1, y2
 		
 	def __add__(self, other):
 		

@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from .BinomialDistribution import Binomial
 
 class Bernoulli(Binomial):
@@ -23,30 +24,6 @@ class Bernoulli(Binomial):
 
     def read_data_file(self):
         pass
-        
-    def plot_bar_pmf(self):
-
-        """
-        Function to plot the pmf of the Bernoulli distribution
-        
-        Args:
-            None
-        
-        Returns:
-            list: x values for the pmf plot
-            list: y values for the pmf plot
-            
-        """
-        
-        # make the plots
-        plt.bar(x = ['0', '1'], height = [self.pmf(0), self.pmf(1)])
-        plt.title('Distribution of Outcomes')
-        plt.ylabel('Probability')
-        plt.xlabel('Outcome')
-
-        plt.show()
-
-        return x, y
 
     def pmf(self, k):
 
@@ -66,3 +43,55 @@ class Bernoulli(Binomial):
             raise
         
         return 1 - self.p if k == 0 else self.p
+
+    def cdf(self, k):
+
+        """
+        Cumulative distribution function calculator for the bernoulli distribution.
+        
+        Args:
+            k (float): point for calculating the cumulative distribution function.
+        
+        Returns:
+            float: cumulative density function output
+        """
+        if(k < 0): return 0
+        return 1 - self.p if k >=0 and k < 1 else 1 
+
+    def plot_pmf_cdf(self):
+
+        """
+        Function to plot the pmf and cdf of the Bernoulli distribution
+        
+        Args:
+            None
+        
+        Returns:
+            list: x values for the pmf plot
+            list: y values for the pmf plot
+            list: x2 values for the cdf plot
+            list: y2 values for the cdf plot
+        """
+        x = [0,1]
+        y = [self.pmf(0), self.pmf(1)]
+        x2 = np.arange(-2, 2, .05).tolist()
+        y2 = map(self.cdf, x2)
+
+        # make the plots
+        fig, axes = plt.subplots(2)
+        fig.subplots_adjust(hspace=.5)
+        axes[0].plot(x, y, 'o')
+        axes[0].set_title('Probability Distribution of Outcomes')
+        axes[0].set_ylabel('Probability Density')
+        axes[0].set_ylim([0,1])
+        axes[0].set_xticks([0, 1])
+        axes[0].axvline(x[0],0, y[0])
+        axes[0].axvline(x[1],0, y[1])
+
+        axes[1].plot(x2, y2)
+        axes[1].set_title('Cumulative Distribution of Outcomes')
+        axes[1].set_ylabel('Probability')
+
+        plt.show()
+
+        return x, y, x2, y2

@@ -20,9 +20,14 @@ class TestBernoulliClass(unittest.TestCase):
         self.assertEqual(round(stdev,2), .49)
         
     def test_pmf(self):
-        self.assertEqual(round(self.bernoulli.pmf(0), 5), .6)
-        self.assertEqual(round(self.bernoulli.pmf(1), 5), .4)
-
+		self.assertEqual(round(self.bernoulli.pmf(0), 5), .6)
+		self.assertEqual(round(self.bernoulli.pmf(1), 5), .4)
+    
+    def test_cdf(self):
+		self.assertEqual(self.bernoulli.cdf(-1), 0)
+		self.assertEqual(self.bernoulli.cdf(0), .6)
+		self.assertEqual(self.bernoulli.cdf(1), 1)
+    
     def test_pmf_assertion_error(self):
         with self.assertRaises(AssertionError):
             self.bernoulli.pmf(2)

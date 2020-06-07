@@ -138,39 +138,67 @@ class Binomial(Distribution):
         prob_rest_are_failures = (1 - self.p) ** (self.n - k)
         
         return n_choose_k * prob_of_k_successes * prob_rest_are_failures
-        
 
-    def plot_bar_pmf(self):
+
+    def cdf(self, k):
 
         """
-        Function to plot the pmf of the binomial distribution
+        Cumulative distribution function calculator for the binomial distribution.
+        
+        Args:
+            k (unsigned float): point for calculating the cumulative distribution function.
+        
+        Returns:
+            float: cumulative density function output
+        """
+        
+        try:
+            assert k >= 0, 'k isn\'t nonnegative'
+        except AssertionError as error:
+            raise
+
+        return sum([self.pmf(x) for x in range(math.floor(k) + 1)])        
+
+    def plot_pmf_cdf(self):
+
+        """
+        Function to plot the pmf and cdf of the binomial distribution
         
         Args:
             None
         
         Returns:
-            list: x values for the pmf plot
-            list: y values for the pmf plot
+            list: x values for the both plot
+            list: y1 values for the pmf plot
+            list: y2 values for cdf plot
             
         """
         
         x = []
-        y = []
+        y1 = []
+        y2 = []
         
         # calculate the x values to visualize
         for i in range(self.n + 1):
             x.append(i)
-            y.append(self.pmf(i))
+            y1.append(self.pmf(i))
+            y2.append(self.cdf(i))
 
         # make the plots
-        plt.bar(x, y)
-        plt.title('Binomial Distribution of Outcomes')
-        plt.ylabel('Probability')
-        plt.xlabel('Outcome')
+        fig, axes = plt.subplots(2,sharex=True)
+        fig.subplots_adjust(hspace=.5)
+        
+        axes[0].plot(x, y1)
+        axes[0].set_title('Probability Distribution of Outcomes')
+        axes[0].set_ylabel('Probability Density')
+
+        axes[1].plot(x, y2)
+        axes[1].set_title('Cumulative Distribution of Outcomes')
+        axes[1].set_ylabel('Probability')
 
         plt.show()
 
-        return x, y
+        return x, y1, y2
         
     def __add__(self, other):
         

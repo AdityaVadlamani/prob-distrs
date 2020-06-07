@@ -29,6 +29,10 @@ class TestGaussianClass(unittest.TestCase):
         self.assertEqual(round(self.gaussian.pdf(25), 5), 0.19947,\
          'pdf function does not give expected result')     
 
+    def test_cdf(self):
+        self.assertEqual(round(self.gaussian.cdf(26), 4), 0.6915,\
+         'cdf function does not give expected result')   
+
     def test_add(self):
         gaussian_one = Gaussian(25, 3)
         gaussian_two = Gaussian(30, 4)

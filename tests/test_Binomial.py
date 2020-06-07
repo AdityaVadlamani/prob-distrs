@@ -37,6 +37,10 @@ class TestBinomialClass(unittest.TestCase):
         self.assertEqual(round(self.binomial_file.pmf(5), 5), 0.04270)
         self.assertEqual(round(self.binomial_file.pmf(3), 5), 0.00584)
 
+	def test_cdf(self):
+		self.assertEqual(round(self.binomial.cdf(5), 5), 0.12560)
+		self.assertEqual(round(self.binomial.cdf(3), 5), 0.01596)
+
     def test_pmf_assertion_error(self):
         with self.assertRaises(AssertionError):
             self.binomial.pmf(5.5)
