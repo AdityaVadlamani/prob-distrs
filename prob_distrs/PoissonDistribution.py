@@ -215,7 +215,7 @@ class Poisson(Distribution):
 			None
 		
 		Returns:
-			string: characteristics of the Gaussian
+			string: characteristics of the Binomial
 		
 		"""
 		

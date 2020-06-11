@@ -15,6 +15,7 @@ Currently, the package supports
     - Binomial Distribution
     - Bernoulli Distribution
     - Poisson Distribution
+    - Exponential Distribution
 
 Installation
 ------------

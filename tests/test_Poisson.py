@@ -28,8 +28,8 @@ class TestPoissonClass(unittest.TestCase):
          'pmf function does not give expected result')
 
 	def test_cdf(self):
-		self.assertEqual(round(self.poisson.pmf(5), 5), .61596,\
-		 'pmf function does not give expected result')
+		self.assertEqual(round(self.poisson.cdf(5), 5), .61596,\
+		 'cdf function does not give expected result')
 
     def test_pmf_assertion_error(self):
         with self.assertRaises(AssertionError):
