@@ -80,6 +80,7 @@ class Bernoulli(Binomial):
         # make the plots
         fig, axes = plt.subplots(2)
         fig.subplots_adjust(hspace=.5)
+        
         axes[0].plot(x, y, 'o')
         axes[0].set_title('Probability Distribution of Outcomes')
         axes[0].set_ylabel('Probability Density')

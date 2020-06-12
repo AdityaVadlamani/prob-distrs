@@ -16,6 +16,7 @@ Currently, the package supports
     - Bernoulli Distribution
     - Poisson Distribution
     - Exponential Distribution
+    - Uniform Distribution
 
 Installation
 ------------

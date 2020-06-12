@@ -157,7 +157,7 @@ class Binomial(Distribution):
         except AssertionError as error:
             raise
 
-        return sum([self.pmf(x) for x in range(math.floor(k) + 1)])        
+        return sum([self.pmf(x) for x in range(int(math.floor(k)) + 1)])        
 
     def plot_pmf_cdf(self):
 

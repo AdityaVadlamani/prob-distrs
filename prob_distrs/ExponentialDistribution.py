@@ -18,9 +18,9 @@ class Exponential(Distribution):
     def __init__(self, rate = 1):
                 
         self.rate = rate
-        self.data = np.random.exponential(1.0/self.rate, 500)
-
         Distribution.__init__(self, self.calculate_mean(), self.calculate_stdev())
+
+        self.data = np.random.exponential(1.0/self.rate, 500)
                         
     
     def calculate_mean(self):
@@ -133,6 +133,7 @@ class Exponential(Distribution):
         data = self.data.sort()
 
         x = list(set(self.data))
+        x.sort()
         y1 = []
         y2 = []
 		
@@ -149,11 +150,11 @@ class Exponential(Distribution):
         axes[0].set_title('Normed Histogram of Data')
         axes[0].set_ylabel('Density')
         
-        axes[1].plot(x, y1, 'o')
+        axes[1].plot(x, y1)
         axes[1].set_title('Probability Distribution for Data')
         axes[1].set_ylabel('Probability Density')
 
-        axes[2].plot(x, y2, 'o')
+        axes[2].plot(x, y2)
         axes[2].set_title('Cumulative Distribution for Data')
         axes[2].set_ylabel('Probability')
 
