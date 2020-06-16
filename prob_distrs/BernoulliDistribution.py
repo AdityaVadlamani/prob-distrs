@@ -58,7 +58,7 @@ class Bernoulli(Binomial):
         if(k < 0): return 0
         return 1 - self.p if k >=0 and k < 1 else 1 
 
-    def plot_pmf_cdf(self):
+    def plot(self):
 
         """
         Function to plot the pmf and cdf of the Bernoulli distribution

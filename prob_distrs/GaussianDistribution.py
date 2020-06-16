@@ -78,7 +78,7 @@ class Gaussian(Distribution):
 		self.stdev = self.calculate_stdev(sample)
 		
 		
-	def plot_histogram(self):
+	def plot_raw_data(self):
 	
 		"""
 		Function to output a histogram of the instance variable data using 
@@ -127,7 +127,7 @@ class Gaussian(Distribution):
 		
 		return .5 * (1 + math.erf((x - self.mean)/(self.stdev * math.sqrt(2))))
 
-	def plot_histogram_pdf_cdf(self, n_spaces = 50):
+	def plot(self, n_spaces = 50):
 
 		"""
 		Function to plot the normalized histogram of the data and a plot of the 

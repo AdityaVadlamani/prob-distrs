@@ -8,7 +8,7 @@ with open('LICENSE') as f:
 
 setup(
 	name='prob_distrs',
-    version='0.5',
+    version='0.5.1',
     description='Some popular probability distributions',
     long_description = readme,
     packages=find_packages(exclude = ('tests', 'docs', 'dists')),

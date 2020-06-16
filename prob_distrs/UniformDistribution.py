@@ -120,7 +120,7 @@ class Uniform(Distribution):
 		
 		return 1.0 * (x - self.a)/(self.b - self.a) if self.a <= x and x <= self.b else 1		
 
-	def plot_histogram_pdf_cdf(self):
+	def plot(self):
 
 		"""
 		Function to plot the probability density function

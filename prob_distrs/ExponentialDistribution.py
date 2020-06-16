@@ -113,7 +113,7 @@ class Exponential(Distribution):
         return 1 - math.exp(-self.rate * k) if k >= 0 else 0
         
 
-    def plot_histogram_pdf_cdf(self):
+    def plot(self):
 
         """
         Function to plot the data, pdf, cdf of the exponential distribution

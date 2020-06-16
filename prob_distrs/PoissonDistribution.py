@@ -85,7 +85,7 @@ class Poisson(Distribution):
 		
 		return self.lam
 
-	def plot_histogram(self):
+	def plot_raw_data(self):
 	
 		"""
 		Function to output a histogram of the instance variable data using 
@@ -141,7 +141,7 @@ class Poisson(Distribution):
 
 		return sum([self.pmf(x) for x in range(int(math.floor(k)) + 1)])
 
-	def plot_histogram_pmf_cdf(self):
+	def plot(self):
 
 		"""
 		Function to plot the pmf of the poisson distribution
