@@ -1,7 +1,7 @@
-prob-dists package
+prob-distrs package
 ==================
 
-Prob-dists is a package which deals with different probability
+prob-distrs is a package which deals with different probability
 distributions
 
 Features
@@ -22,11 +22,11 @@ Installation
 ------------
 
 Use the package manager `pip <https://pip.pypa.io/en/stable/>`__ to
-install prob-dists.
+install prob-distrs.
 
 .. code:: bash
 
-    pip install prob_dists
+    pip install prob_distrs
 
 License
 -------
